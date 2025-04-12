@@ -1,0 +1,80 @@
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Mail, Phone, Sun, Moon } from "lucide-react";
+import Image from "next/image";
+
+export default function Home() {
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleTheme = () => setDarkMode(!darkMode);
+
+  return (
+    <div className={`${darkMode ? "bg-gray-900 text-white" : "bg-gray-50 text-gray-900"} min-h-screen transition-colors`}>
+
+      {/* Header with Logo and Theme Toggle */}
+      <header className="flex items-center justify-between px-6 py-4 border-b">
+        <div className="flex items-center space-x-4">
+          <Image src="/image.png" alt="SAMEFAN Logo" width={60} height={60} />
+          <h1 className="text-2xl font-bold">SAMEFAN Security</h1>
+        </div>
+        <Button onClick={toggleTheme} variant="ghost">
+          {darkMode ? <Sun /> : <Moon />}
+        </Button>
+      </header>
+
+      {/* Hero Section */}
+      <section className="py-20 px-6 text-center bg-gradient-to-r from-blue-900 to-gray-800 text-white">
+        <h2 className="text-5xl font-bold mb-4">Your Safety, Our Priority</h2>
+        <p className="text-xl mb-6">Professionelle Sicherheitsdienste nach Ihren Bedürfnissen</p>
+        <Button className="text-lg px-6 py-3">Request a Quote</Button>
+      </section>
+
+      {/* About Section */}
+      <section className="py-16 px-6 max-w-5xl mx-auto text-center">
+        <h2 className="text-3xl font-semibold mb-4">About SAMEFAN Security</h2>
+        <p className="text-lg">
+          SAMEFAN Security steht für hochwertige Sicherheitslösungen mit Fokus auf Zuverlässigkeit, Erfahrung und Kundenzufriedenheit. Unser geschultes Team sorgt rund um die Uhr für Ihre Sicherheit.
+        </p>
+      </section>
+
+      {/* Services Section */}
+      <section className="py-16 px-6">
+        <h2 className="text-3xl font-semibold text-center mb-10">Our Services / Unsere Dienstleistungen</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {["Event Security", "Corporate Security", "Mobile Patrols", "Residential Protection", "24/7 Monitoring", "Access Control"].map((service, idx) => (
+            <Card key={idx} className="shadow-lg">
+              <CardContent className="p-6 text-center">
+                <img src={`https://source.unsplash.com/400x300/?security,${idx}`} alt={service} className="mb-4 rounded-lg" />
+                <h3 className="text-xl font-bold mb-2">{service}</h3>
+                <p>
+                  Professionelle und zuverlässige {service.toLowerCase()}-Lösungen, abgestimmt auf Ihre individuellen Sicherheitsanforderungen.
+                </p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="bg-gray-100 dark:bg-gray-800 py-16 px-6">
+        <h2 className="text-3xl font-semibold text-center mb-10">Contact Us / Kontakt</h2>
+        <div className="max-w-xl mx-auto text-center space-y-4">
+          <p><Phone className="inline mr-2" /> +251 900 000 000</p>
+          <p><Mail className="inline mr-2" /> info@samefansecurity.com</p>
+          <form className="mt-6 space-y-4">
+            <input type="text" placeholder="Your Name / Ihr Name" className="w-full p-3 border rounded text-black" />
+            <input type="email" placeholder="Your Email / Ihre E-Mail" className="w-full p-3 border rounded text-black" />
+            <textarea placeholder="Your Message / Ihre Nachricht" className="w-full p-3 border rounded h-32 text-black"></textarea>
+            <Button type="submit" className="w-full">Send Message / Nachricht senden</Button>
+          </form>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-black text-white text-center py-6">
+        <p>&copy; {new Date().getFullYear()} SAMEFAN Security. All rights reserved.</p>
+      </footer>
+    </div>
+  );
+}
